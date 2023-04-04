@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Task Analysis</title>
+</head>
+
+<body>
+    <h1>Task Analysis</h1>
+    <h2>Tasks Completed After Deadline</h2>
+    <ul>
+        {% for task in late_tasks %}
+        <li>{{ task.title }} - {{ task.latency }} minutes late</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Average Task Completion Time</h2>
+    <p>{{ avg_completion_time }} minutes</p>
+
+    <h2>Completed Tasks per Task Type</h2>
+    <ul>
+        {% for task in tasks_per_type %}
+        <li>{{ task.task_type }} - {{ task.count }} tasks</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Upcoming Tasks</h2>
+    <ul>
+        {% for task in upcoming_tasks %}
+        <li>{{ task.title }} - Deadline: {{ task.deadline }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Top 2 Longest Completed Tasks</h2>
+    <ul>
+        {% for task in top2_longest_tasks %}
+        <li>{{ task.title }} - Completed in {{ task.completion_time }} minutes</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('tasks') }}">Back to Tasks</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+
+</html>
