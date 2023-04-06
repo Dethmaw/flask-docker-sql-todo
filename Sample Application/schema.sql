@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS cs353hw4db;
 USE cs353hw4db;
 
---@block
 CREATE TABLE user (
     id INT NOT NULL AUTO_INCREMENT,
     password VARCHAR(255) NOT NULL,
@@ -10,22 +9,15 @@ CREATE TABLE user (
     PRIMARY KEY (id)
 );
 
---@block
 INSERT INTO user (password, username, email) VALUES
 ('pass123', 'user1', 'user1@example.com'),
 ('password', 'user2', 'user2@example.com');
 
---@block
-SELECT * FROM user;
-
-
---@block
 CREATE TABLE tasktype (
     type VARCHAR(255) NOT NULL,
     PRIMARY KEY (type)
 );
 
---@block
 INSERT INTO tasktype (type) VALUES
 ('Health'),
 ('Job'),
@@ -33,15 +25,10 @@ INSERT INTO tasktype (type) VALUES
 ('Family'),
 ('Hobbies');
 
-
---@block
-SELECT * FROM tasktype;
-
---@block
 CREATE TABLE task (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
     status VARCHAR(255) NOT NULL,
     deadline DATETIME NOT NULL,
     creation_time DATETIME NOT NULL,
@@ -53,7 +40,6 @@ CREATE TABLE task (
     FOREIGN KEY (task_type) REFERENCES tasktype(type)
 );
 
---@block
 INSERT INTO task (title, description, status, deadline, creation_time, done_time, user_id, task_type) VALUES
 ('Go for a walk', 'Walk for at least 30 mins', 'Done', '2023-03-20 17:00:00', '2023-03-15 10:00:00', '2023-03-20 10:00:00', 1, 'Health'),
 ('Clean the house', 'Clean the whole house', 'Done', '2023-03-18 12:00:00', '2023-03-14 09:00:00', '2023-03-18 17:00:00', 1, 'Lifestyle'),
@@ -66,17 +52,5 @@ INSERT INTO task (title, description, status, deadline, creation_time, done_time
 ('Grocery shopping', 'Buy groceries for the week', 'Todo', '2023-04-05 18:00:00', '2023-03-31 10:00:00', NULL, 2, 'Family'),
 ('Painting', 'Paint a landscape for 2 hours', 'Done', '2023-03-23 15:00:00', '2023-03-18 14:00:00', '2023-03-23 16:00:00', 2, 'Hobbies');
 
-
 --@block
-SELECT * FROM task;
-
---@block
-SHOW DATABASES;
-
---@block
-SHOW TABLES IN cs353hw4db;
-
---@block
-DROP TABLE task;
-DROP TABLE taskType;
-DROP TABLE user;
+DROP DATABASE IF EXISTS cs353hw4db;
